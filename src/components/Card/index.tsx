@@ -10,16 +10,9 @@ const Card = ({ dados }: ICard) => {
         <div key={dados.id}>
           <h4>
             <>
-              {dados.nome} - {dados.data}
+              {dados.nome} 
             </>
-          </h4>
-          <h3>Título: {dados.titulo}</h3>
-          <h3>Mensagem: {dados.mensagem}</h3>
-          <div>
-            {dados.topico.map((topic) => (
-              <span key={topic.id}>{topic.item}</span>
-            ))}
-          </div>
+         </h4>
         </div>
       )}
     </S.Card>

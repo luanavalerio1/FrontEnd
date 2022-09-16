@@ -6,7 +6,7 @@ export const Home = styled.section`
   }
   aside {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto ;
     gap: 0.5rem;
   }
 `
