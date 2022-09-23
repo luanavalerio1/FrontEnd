@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { CadastrarPage, HomePage, LayoutPage, LoginPage } from "pages";
-
+import { AdmPage, CadastrarPage, HomePage, LayoutPage, LoginPage } from "pages";
+import ProtectedRoute from "./ProtectedRoute";
 const Rotas = () => {
   return (
     <Routes>
@@ -8,6 +8,9 @@ const Rotas = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/cadastrar" element={<CadastrarPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/adm" element={<AdmPage />} />
+        </Route>
       </Route>
     </Routes>
   );
