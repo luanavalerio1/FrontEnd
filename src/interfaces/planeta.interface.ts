@@ -1,4 +1,4 @@
-export interface IMessageData {
+export interface IPlanetaData {
     id?: number
     title?: string
     message?: string

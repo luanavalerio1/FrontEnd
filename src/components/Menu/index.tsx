@@ -22,7 +22,7 @@ const Menu = () => {
           user ? (
             <ul>
               <li>
-                <Link to="/adm/message">Universo</Link>
+                <Link to="/adm/Planeta">Universo</Link>
               </li>
               <li>
                 <button onClick={logout}>{user.name} <GrLogout /></button>
@@ -41,6 +41,4 @@ const Menu = () => {
         }
       </nav>
     </S.Cabecalho >
-  );
-};
-export default Menu;
+  
