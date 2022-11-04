@@ -29,7 +29,7 @@ const AdmPlaneta = () => {
     async (id: number) => {
       confirmAlert({
         title: "Atenção",
-        planeta: "Tem certeza que deseja apagar o planeta selecionado?",
+        message: "Tem certeza que deseja apagar o planeta selecionado?",
         buttons: [
           {
             label: "SIM",
@@ -81,8 +81,8 @@ const AdmPlaneta = () => {
                   planetas.map((item) => (
                     <tr key={item.id}>
                       <td>{item.user?.name}</td>
-                      <td>{item.title}</td>
                       <td>{item.planeta}</td>
+                      <td>{item.apelido}</td>
                       <td>
                         <ButtonComponent
                           type="button"

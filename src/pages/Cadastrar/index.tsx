@@ -10,6 +10,7 @@ import { ButtonComponent } from "components";
 import { IErrorResponse, IUser } from "interfaces/user.interface";
 import { AxiosError } from "axios";
 import { apiUser } from "services/data";
+import Planeta from "services/data/Planeta";
 
 const Cadastrar = () => {
   const navigate = useNavigate();
@@ -29,12 +30,12 @@ const Cadastrar = () => {
       navigate('/login')
     } catch (error) {
       const err = error as AxiosError<IErrorResponse>
-      let messages = err.response?.data.message
+      let planetas = err.response?.data.planeta
       if (err.response?.data.errors) {
-        messages = err.response?.data.errors?.map((i) => i.message)
+        planetas = err.response?.data.errors?.map((i) => i.planeta)
           .reduce((total, cur) => `${total} ${cur}`)
       }
-      toast.error(messages)
+      toast.error(planetas)
     }
   }
   return (

@@ -1,2 +1,2 @@
-export { default as AdmPlaneta } from "./Planeta"
+export { default as AdmPlanetaPage } from "./Planeta"
 export { default as AdmPlanetaStorePage} from "./Planeta/Store"

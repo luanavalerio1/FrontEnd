@@ -3,16 +3,14 @@ import * as S from "./styles";
 import { LoadingComponent, ButtonComponent } from "components";
 import { FcDatabase, FcUndo } from "react-icons/fc";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { apiPlaneta, apiTopic } from "services/data";
+import { apiPlaneta } from "services/data";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { IPlanetaForm } from "interfaces/planeta.interface";
 import { IErrorResponse } from "interfaces/user.interface";
-import { ITopicData } from "interfaces/topic.interface";
 
-const MessageStore = () => {
+const PlanetaStore = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [topics, setTopics] = useState<ITopicData[]>()
   const navigate = useNavigate();
   const [formData, setFormData] = useState<IPlanetaForm>({
     title: '',
@@ -25,26 +23,26 @@ const MessageStore = () => {
     event.preventDefault()
     try {
       if (Number(id) > 0) {
-        await apiMessage.update(Number(id), formData);
-        toast.success("Mensagem alterada com sucesso!");
+        await apiPlaneta.update(Number(id), formData);
+        toast.success("Planeta alterada com sucesso!");
       } else {
-        await apiMessage.store(formData);
-        toast.success("Mensagem cadastrada com sucesso!");
+        await apiPlaneta.store(formData);
+        toast.success("Planeta cadastrada com sucesso!");
       }
-      navigate('/adm/message')
+      navigate('/adm/planeta')
     } catch (error) {
       const err = error as AxiosError<IErrorResponse>
-      let messages = err.response?.data.message
+      let messages = err.response?.data.planeta
       if (err.response?.data.errors) {
-        messages = err.response?.data.errors?.map((i) => i.message)
+        messages = err.response?.data.errors?.map((i) => i.planeta)
           .reduce((total, cur) => `${total} ${cur}`)
       }
       toast.error(messages)
     }
   }
 
-  async function handleChange(e: IMessageForm) {
-    setFormData((state: IMessageForm) => ({ ...state, ...e }))
+  async function handleChange(e: IPlanetaForm) {
+    setFormData((state: IPlanetaForm) => ({ ...state, ...e }))
   }
 
   async function handleCheck(e: string) {
@@ -54,25 +52,18 @@ const MessageStore = () => {
     } else {
       topic.push(Number(e))
     }
-    setFormData((state: IMessageForm) => ({ ...state, topic }))
+    setFormData((state: IPlanetaForm) => ({ ...state, topic }))
   }
 
   useEffect(() => {
-    const loadTopics = async () => {
-      try {
-        const response = await apiTopic.index()
-        setTopics(response.data)
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    
     if (Number(id) > 0) {
       const fetchData = async (id: number) => {
         try {
-          const response = await apiMessage.show(id);
+          const response = await apiPlaneta.show(id);
           setFormData({
             ...response.data,
-            topic: response.data.messageTopic?.map((i) => i.id)
+           
           });
         } catch (error) {
           console.log(error);
@@ -80,7 +71,7 @@ const MessageStore = () => {
       };
       fetchData(Number(id));
     }
-    loadTopics()
+   
     setIsLoading(false);
   }, [id]);
 
@@ -92,38 +83,32 @@ const MessageStore = () => {
         <>
           <S.Main>
             <form method="POST" onSubmit={handleSubmit}>
-              <Link to="/adm/message">
+              <Link to="/adm/planeta">
                 <FcUndo /> Voltar
               </Link>
               <div>
-                <label htmlFor="title">Título: </label>
-                <input type="text" id="title" placeholder="Escreva um título" required
-                  onChange={(e) => handleChange({ title: e.target.value })}
-                  value={formData?.title}
+                <label htmlFor="planeta">Nome: </label>
+                <input type="text" id="planeta" placeholder="Escreva o nome" required
+                  onChange={(e) => handleChange({ planeta: e.target.value })}
+                  value={formData?.planeta}
                 />
               </div>
               <div>
-                <label htmlFor="message">Mensagem: </label>
-                <textarea id="message" placeholder="Escreva uma mensagem" required
-                  onChange={(e) => handleChange({ message: e.target.value })}
-                  value={formData?.message}
+                <label htmlFor="planeta">Planeta: </label>
+                <textarea id="planeta" placeholder="Escreva o nome do planeta" required
+                  onChange={(e) => handleChange({ planeta: e.target.value })}
+                  value={formData?.planeta}
                 />
               </div>
               <div>
-                <label>Tópicos:</label>
-                <div>
-                  {topics && topics.map((i) => (
-                    <div key={i.id}><>
-                      <input type="checkbox" id={`topic${i.id}`} name="topics[]"
-                        onChange={(e) => handleCheck(e.target.value)}
-                        value={i.id}
-                        checked={formData?.topic?.includes(Number(i.id))}
-                      />
-                      <label htmlFor={`topic${i.id}`}>{i.name}</label>
-                    </></div>
-                  ))}
-                </div>
+                <label htmlFor="planeta">Apelido: </label>
+                <textarea id="planeta" placeholder="Escreva o apelido do planeta" required
+                  onChange={(e) => handleChange({ planeta: e.target.value })}
+                  value={formData?.planeta}
+                />
               </div>
+             
+             
               <ButtonComponent bgColor="add" type="submit">
                 Enviar <FcDatabase />
               </ButtonComponent>
@@ -135,4 +120,4 @@ const MessageStore = () => {
   );
 };
 
-export default MessageStore;
+export default PlanetaStore;

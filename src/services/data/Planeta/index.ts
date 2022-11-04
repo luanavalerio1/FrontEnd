@@ -1,22 +1,22 @@
-import { IMessageData } from "interfaces/message.interface";
+import { IPlanetaData } from "interfaces/planeta.interface";
 import api from "services/api";
 
-class MessageData {
+class PlanetaData {
   index() {
-    return api.get<IMessageData[]>('/messages')
+    return api.get<IPlanetaData[]>('/planetas')
   }
-  store(data: IMessageData) {
-    return api.post(`/messages`, data)
+  store(data: IPlanetaData) {
+    return api.post(`/planetas`, data)
   }
   show(id: number) {
-    return api.get<IMessageData>(`/messages/${id}`)
+    return api.get<IPlanetaData>(`/planetas/${id}`)
   }
-  update(id: number, data: IMessageData) {
-    return api.put(`/messages/${id}`, data)
+  update(id: number, data: IPlanetaData) {
+    return api.put(`/planetas/${id}`, data)
   }
   destroy(id: number) {
-    return api.delete(`/messages/${id}`)
+    return api.delete(`/planetas/${id}`)
   }
 }
 
-export default new MessageData()
+export default new PlanetaData()
