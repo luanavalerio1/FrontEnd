@@ -13,9 +13,9 @@ const PlanetaStore = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [formData, setFormData] = useState<IPlanetaForm>({
-    title: '',
+    name: '',
     planeta: '',
-    topic: []
+    apelido: ''
   })
   const { id } = useParams<{ id: string }>();
 
@@ -45,15 +45,6 @@ const PlanetaStore = () => {
     setFormData((state: IPlanetaForm) => ({ ...state, ...e }))
   }
 
-  async function handleCheck(e: string) {
-    let topic: number[] = []
-    if (formData.topic?.includes(Number(e))) {
-      topic = formData.topic.filter((i) => i !== Number(e))
-    } else {
-      topic.push(Number(e))
-    }
-    setFormData((state: IPlanetaForm) => ({ ...state, topic }))
-  }
 
   useEffect(() => {
     
@@ -87,10 +78,10 @@ const PlanetaStore = () => {
                 <FcUndo /> Voltar
               </Link>
               <div>
-                <label htmlFor="planeta">Nome: </label>
-                <input type="text" id="planeta" placeholder="Escreva o nome" required
-                  onChange={(e) => handleChange({ planeta: e.target.value })}
-                  value={formData?.planeta}
+                <label htmlFor="Nome">Nome: </label>
+                <input type="text" id="nome" placeholder="Escreva o nome" required
+                  onChange={(e) => handleChange({ name: e.target.value })}
+                  value={formData?.name}
                 />
               </div>
               <div>
@@ -101,10 +92,10 @@ const PlanetaStore = () => {
                 />
               </div>
               <div>
-                <label htmlFor="planeta">Apelido: </label>
-                <textarea id="planeta" placeholder="Escreva o apelido do planeta" required
-                  onChange={(e) => handleChange({ planeta: e.target.value })}
-                  value={formData?.planeta}
+                <label htmlFor="apelido">Apelido: </label>
+                <textarea id="apelido" placeholder="Escreva o apelido do planeta" required
+                  onChange={(e) => handleChange({ apelido: e.target.value })}
+                  value={formData?.apelido}
                 />
               </div>
              

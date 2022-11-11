@@ -1,18 +1,17 @@
 export interface IPlanetaData {
     id?: number
+    name?: string
     planeta?: string
     apelido?: string
-    user?: {
-      name: string
-    }
+    
   }
 
 
 
 export interface IPlanetaForm {
   id?: number
-  title?: string
+  name?: string
   planeta?: string
-  created_at?: string
-  topic?: number[] | undefined
+  apelido?: string
+  
 }

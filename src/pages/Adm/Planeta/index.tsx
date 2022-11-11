@@ -80,7 +80,7 @@ const AdmPlaneta = () => {
                 {planetas &&
                   planetas.map((item) => (
                     <tr key={item.id}>
-                      <td>{item.user?.name}</td>
+                      <td>{item.name}</td>
                       <td>{item.planeta}</td>
                       <td>{item.apelido}</td>
                       <td>
